@@ -1,0 +1,46 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+.calculator{
+    display: flex;
+    flex-direction: column;
+}
+
+.numpad{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.display{
+    border: 2px solid green;
+    border-radius: 10px;
+    background-color: greenyellow;
+    min-height: 70px;
+}
+
+.calculator{
+    border: 3px solid black;
+    border-radius: 5px;
+    background-color: grey;
+    padding: 30px;
+    width: 300px;
+}
+
+.numpad > div{
+    font-size: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: gainsboro;
+    padding: 15px;
+}
+
+.number{
+    color:darkslategrey;
+}
+
+.operator{
+    color:darkslateblue;
+}
