@@ -60,6 +60,10 @@ body{
     filter: brightness(0.8);
 }
 
+.numpad > .clicked{
+    background-color:indigo;
+}
+
 .number{
     color:darkslategrey;
 }
