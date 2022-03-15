@@ -1,11 +1,43 @@
 const operatorButtons = document.querySelectorAll('.numpad > .operator');
 const buttons = document.querySelectorAll('.numpad > .number');
+const shownButtons = document.querySelectorAll('.numpad > .show');
+
+shownButtons.forEach(button => button.addEventListener("click", displayShow));
+
+function displayShow(){
+    let shownDisplay = document.querySelector(".input");
+    shownDisplay.textContent += this.textContent;
+}
 
 let arg1 = 0;
-let arg2 = "";
 let inputNumber = "";
+let displayCalc = "";
 let currentOperator = "";
 let result = 0;
+let opEnded = false;
+let res = document.querySelector(".result");
+
+const clear = document.querySelector(".C-but");
+const clearAll = document.querySelector(".AC-but");
+
+clearAll.addEventListener("click", clearAllFunc);
+clear.addEventListener("click", clearFunc);
+
+function clearFunc(){
+    inputNumber = "";
+    const input = document.querySelector(".input");
+    input.textContent = "";
+}
+
+function clearAllFunc(){
+opEnded = false;
+inputNumber = "";
+res.textContent = "";
+const input = document.querySelector(".input");
+input.textContent = inputNumber;
+currentOperator = "";
+arg1 = 0;
+}
 
 operatorButtons.forEach(button => button.addEventListener("click", storeArg));
 buttons.forEach(button => button.addEventListener("click", updateDisplay))
@@ -31,10 +63,14 @@ function mod(a, b){
 }
 
 function updateDisplay(){
+    if(opEnded){
+        res.textContent = "";
+        opEnded = false;
+    }
     let no = this.textContent;
-    const input = document.querySelector(".input");
+ 
     inputNumber += no;
-    input.textContent = inputNumber;
+
 }
 
 function storeArg(){
@@ -67,8 +103,10 @@ function operate(operator, a, b){
         if(b === 0){
         result = 'error can not divide by 0 bro';
         break;
-        }
+        }else{
         result = div(a, b);
+        break;
+        }
     case 'mod':
         result = mod(a,b);
         break;
@@ -81,6 +119,10 @@ const equalButt = document.querySelector(".equal-but");
 equalButt.addEventListener("click", showResult);
 
 function showResult(){
-    let res = document.querySelector(".result");
+    operate(currentOperator, arg1, Number(inputNumber));
     res.textContent = result;
+    opEnded = true;
+    arg1 = 0;
+    result = 0;
+    inputNumber = "";
 }
