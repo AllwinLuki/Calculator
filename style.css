@@ -3,6 +3,18 @@
     font-weight: bold;
 }
 
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+}
+
+.title{
+    font-size: 50px;
+}
+
 .calculator{
     display: flex;
     flex-direction: column;
@@ -18,7 +30,12 @@
     border: 2px solid green;
     border-radius: 10px;
     background-color: greenyellow;
-    min-height: 70px;
+    height: 80px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 25px;
 }
 
 .calculator{
@@ -35,6 +52,12 @@
     border-radius: 5px;
     background-color: gainsboro;
     padding: 15px;
+    flex: 1 0 40px;
+    text-align: center;
+}
+
+.numpad > div:hover{
+    filter: brightness(0.8);
 }
 
 .number{
@@ -43,4 +66,27 @@
 
 .operator{
     color:darkslateblue;
+}
+
+.numpad > .AC-but{
+    width: 41px;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 25px;
+   
+}
+
+.numpad > .AC-but, .numpad > .C-but{
+    background-color: brown;
+    color: white;
+}
+
+.numpad > .equal-but{
+    background-color:cadetblue;
+    color: aliceblue;
+    flex: 25 0 40px;
+}
+
+.result{
+    text-align: right;
 }
