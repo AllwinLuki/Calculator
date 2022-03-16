@@ -1,14 +1,7 @@
 const operatorButtons = document.querySelectorAll('.numpad > .operator');
 const buttons = document.querySelectorAll('.numpad > .number');
 const shownButtons = document.querySelectorAll('.numpad > .show');
-
-shownButtons.forEach(button => button.addEventListener("click", displayShow));
-
-function displayShow(){
-    let shownDisplay = document.querySelector(".input");
-    shownDisplay.textContent += this.textContent;
-}
-
+const shownDisplay = document.querySelector(".input");
 let arg1 = 0;
 let inputNumber = "";
 let displayCalc = "";
@@ -16,17 +9,27 @@ let currentOperator = "";
 let result = 0;
 let opEnded = false;
 let res = document.querySelector(".result");
-
 const clear = document.querySelector(".C-but");
 const clearAll = document.querySelector(".AC-but");
 
 clearAll.addEventListener("click", clearAllFunc);
 clear.addEventListener("click", clearFunc);
 
+shownButtons.forEach(button => button.addEventListener("click", displayShow));
+
+function displayShow(){
+    shownDisplay.textContent += this.textContent;
+}
+
 function clearFunc(){
+    if(!opEnded){
+    res.textContent = "";
+    let original = shownDisplay.textContent;
+    original = original.substring(0, (original.length - inputNumber.length));
+    shownDisplay.textContent = original;
     inputNumber = "";
-    const input = document.querySelector(".input");
-    input.textContent = "";
+    }
+    
 }
 
 function clearAllFunc(){
@@ -79,12 +82,10 @@ function storeArg(){
         currentOperator = this.dataset.op;
         arg1 = Number(inputNumber);
         inputNumber = "";
-        console.log(arg1);
     }else{
         arg1 = operate(currentOperator, arg1, Number(inputNumber));
         currentOperator = this.dataset.op;
         inputNumber = "";
-        console.log(arg1);
     }
 }
 
@@ -101,7 +102,8 @@ function operate(operator, a, b){
         break;
     case 'div':
         if(b === 0){
-        result = 'error can not divide by 0 bro';
+        alert("can't divide by 0 bro");
+        clearAllFunc();
         break;
         }else{
         result = div(a, b);
